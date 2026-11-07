@@ -1,0 +1,2 @@
+/* Shared mobile improvements for Food Rescue Connect */
+html{-webkit-text-size-adjust:100%} body{overflow-wrap:break-word} img,video,canvas,iframe{max-width:100%} input,select,textarea,button{max-width:100%} .table-responsive{-webkit-overflow-scrolling:touch}@media(max-width:768px){body{font-size:15px}.container,.container-fluid{padding-left:14px;padding-right:14px}.card{max-width:100%}.table{min-width:620px}.btn{min-height:42px}input,select,textarea{font-size:16px!important}}

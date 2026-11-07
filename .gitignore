@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+report.pdf
+static/uploads/
+static/test.tmp

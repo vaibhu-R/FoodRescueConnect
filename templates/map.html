@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <title>Food Rescue Map</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <style>
+        body{
+            margin:0;
+            font-family:Arial;
+        }
+
+        h2{
+            text-align:center;
+            color:#0f172a;
+        }
+
+        #map{
+            height:650px;
+            width:100%;
+        }
+
+        .popup-img{
+            width:180px;
+            height:120px;
+            object-fit:cover;
+            border-radius:8px;
+            margin-top:8px;
+        }
+    </style>
+
+
+    <meta name="theme-color" content="#172554">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="manifest" href="/static/manifest.webmanifest">
+    <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+<h2>📍 Food Donation Locations</h2>
+
+<div id="map"></div>
+
+<script>
+
+var map = L.map('map').setView([21.1458,79.0882],12);
+
+L.tileLayer(
+'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+{
+    attribution:'OpenStreetMap'
+}).addTo(map);
+
+{% for d in donations %}
+
+L.marker([{{ d[6] }},{{ d[7] }}])
+
+.addTo(map)
+
+.bindPopup(`
+<b>🍛 Food :</b> {{ d[1] }}<br>
+
+<b>📦 Quantity :</b> {{ d[2] }}<br>
+
+<b>📍 Location :</b> {{ d[3] }}<br>
+
+<b>🟢 Status :</b> {{ d[4] }}<br><br>
+
+{% if d[5] %}
+<img
+src="{{ url_for('static', filename='uploads/' + d[5]) }}"
+class="popup-img">
+{% else %}
+No Image Available
+{% endif %}
+`);
+
+{% endfor %}
+
+</script>
+
+
+<script>if ("serviceWorker" in navigator) { window.addEventListener("load", () => { navigator.serviceWorker.register("/service-worker.js").catch(error => console.error("Service worker registration failed:", error)); }); }</script>
+
+</body>
+
+</html>

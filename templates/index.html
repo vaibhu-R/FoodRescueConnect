@@ -1,0 +1,917 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Rescue Connect | Save Food, Share Hope</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root {
+            --navy: #172554;
+            --navy-light: #263b70;
+            --lavender: #8B7CF6;
+            --lavender-light: #F5F3FF;
+            --amber: #F59E0B;
+            --white: #FFFFFF;
+            --text: #263247;
+            --muted: #69758A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: var(--white);
+            padding: 17px 0;
+            box-shadow: 0 3px 20px rgba(23,37,84,0.06);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 23px;
+            color: var(--navy) !important;
+        }
+
+        .brand-icon {
+            color: var(--lavender);
+            margin-right: 8px;
+        }
+
+        .nav-link {
+            color: var(--navy) !important;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+
+        .nav-link:hover {
+            color: var(--lavender) !important;
+        }
+
+        .btn-login {
+            border: 1.5px solid var(--navy);
+            color: var(--navy);
+            border-radius: 9px;
+            padding: 10px 22px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .btn-login:hover {
+            background: var(--navy);
+            color: white;
+        }
+
+        .btn-register {
+            background: var(--lavender);
+            color: white;
+            border-radius: 9px;
+            padding: 11px 23px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-register:hover {
+            background: #7160df;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* HERO */
+
+        .hero {
+            background: var(--navy);
+            color: white;
+            padding: 95px 0 105px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            background: rgba(139,124,246,0.17);
+            border-radius: 50%;
+            top: -230px;
+            right: -100px;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(245,158,11,0.09);
+            border-radius: 50%;
+            bottom: -180px;
+            left: 30%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: rgba(139,124,246,0.18);
+            color: #DCD6FF;
+            border: 1px solid rgba(139,124,246,0.4);
+            padding: 9px 17px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 23px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(38px, 5vw, 60px);
+            font-weight: 800;
+            line-height: 1.17;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #B9AEFF;
+        }
+
+        .hero p {
+            color: #D1D8EA;
+            font-size: 17px;
+            line-height: 1.8;
+            max-width: 550px;
+            margin-bottom: 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            background: var(--amber);
+            color: #172554;
+            padding: 14px 25px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-weight: 800;
+            transition: 0.3s;
+        }
+
+        .btn-hero:hover {
+            background: #7160df;
+            color: var(--navy);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline-hero {
+            border: 1.5px solid #B9AEFF;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .btn-outline-hero:hover {
+            background: var(--lavender);
+            color: white;
+        }
+
+        .hero-image {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 410px;
+            object-fit: cover;
+            border-radius: 25px;
+            border: 5px solid rgba(255,255,255,0.15);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+        }
+
+        .floating-card {
+            position: absolute;
+            bottom: 349px;
+            left: -25px;
+            background: rgb(201, 182, 212);
+            color: var(--navy);
+            padding: 17px 20px;
+            border-radius: 13px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.2);
+            font-weight: 700;
+        }
+
+        .floating-card i {
+            color: var(--lavender);
+            margin-right: 8px;
+        }
+
+        /* COMMON SECTION */
+
+        .section-padding {
+            padding: 85px 0;
+        }
+
+        .section-tag {
+            color: var(--lavender);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            color: var(--navy);
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            font-size: clamp(30px, 4vw, 42px);
+            margin-bottom: 15px;
+        }
+
+        .section-description {
+            color: var(--muted);
+            max-width: 620px;
+            margin: auto;
+            line-height: 1.8;
+        }
+
+        /* FEATURES */
+
+        .features-section {
+            background: var(--lavender-light);
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 17px;
+            padding: 30px 25px;
+            height: 100%;
+            border: 1px solid #ECE9FF;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(23,37,84,0.09);
+        }
+
+        .feature-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 23px;
+            background: #EFECFF;
+            color: var(--lavender);
+            margin-bottom: 22px;
+        }
+
+        .feature-card h5 {
+            color: var(--navy);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* HOW IT WORKS */
+
+        .step-number {
+            width: 54px;
+            height: 54px;
+            background: var(--navy);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800;
+            margin: 0 auto 20px;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .step-card h5 {
+            color: var(--navy);
+            font-weight: 800;
+        }
+
+        .step-card p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* USER ROLES */
+
+        .roles-section {
+            background: #F8F9FF;
+        }
+
+        .role-card {
+            background: white;
+            padding: 32px 25px;
+            border-radius: 17px;
+            border: 1px solid #E8E9F5;
+            text-align: center;
+            height: 100%;
+            transition: 0.3s;
+        }
+
+        .role-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(23,37,84,0.08);
+        }
+
+        .role-icon {
+            font-size: 35px;
+            color: var(--lavender);
+            margin-bottom: 20px;
+        }
+
+        .role-card h5 {
+            color: var(--navy);
+            font-weight: 800;
+        }
+
+        .role-card p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* IMPACT */
+
+        .impact-section {
+            background: var(--navy);
+            color: white;
+        }
+
+        .impact-section .section-title {
+            color: white;
+        }
+
+        .impact-section .section-description {
+            color: #D1D8EA;
+        }
+
+        .impact-item {
+            text-align: center;
+            padding: 25px 10px;
+        }
+
+        .impact-item i {
+            color: #B9AEFF;
+            font-size: 35px;
+            margin-bottom: 17px;
+        }
+
+        .impact-item h5 {
+            font-weight: 800;
+        }
+
+        .impact-item p {
+            color: #CFD6E8;
+            font-size: 14px;
+        }
+
+        /* CTA */
+
+        .cta-section {
+            background: var(--lavender-light);
+            padding: 75px 20px;
+            text-align: center;
+        }
+
+        .cta-box {
+            background: white;
+            padding: 50px 25px;
+            border-radius: 22px;
+            box-shadow: 0 10px 35px rgba(23,37,84,0.06);
+        }
+
+        .cta-box h2 {
+            color: var(--navy);
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .cta-box p {
+            color: var(--muted);
+            margin-bottom: 25px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #101B3C;
+            color: white;
+            padding: 35px 0;
+            text-align: center;
+        }
+
+        footer p {
+            color: #B9C1D4;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        footer span {
+            color: #B9AEFF;
+            font-weight: 700;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 991px) {
+            .hero {
+                padding: 65px 0;
+            }
+
+            .hero-image {
+                margin-top: 45px;
+            }
+
+            .floating-card {
+                left: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-image img {
+                height: 280px;
+            }
+
+            .hero {
+                padding: 55px 0 70px;
+            }
+
+            .section-padding {
+                padding: 60px 0;
+            }
+
+            .floating-card {
+                font-size: 13px;
+                padding: 12px;
+            }
+        }
+    </style>
+
+    <meta name="theme-color" content="#172554">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="manifest" href="/static/manifest.webmanifest">
+    <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+
+        <a class="navbar-brand" href="/">
+            <i class="fa-solid fa-hand-holding-heart brand-icon"></i>
+            Food Rescue Connect
+        </a>
+
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#features">Features</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#how-it-works">How It Works</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+
+                <li class="nav-item my-2 my-lg-0 ms-lg-2">
+                    <a class="btn-login" href="/login">Login</a>
+                </li>
+
+                <li class="nav-item mt-3 mt-lg-0 ms-lg-3">
+                    <a class="btn-register" href="/register">Get Started</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero" id="home">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-lg-6 hero-content">
+
+                <div class="hero-tag">
+                    <i class="fa-solid fa-leaf me-2"></i>
+                    Together for a Hunger-Free Community
+                </div>
+
+                <h1>
+                    Don't Waste Food.<br>
+                    <span>Share Hope.</span>
+                </h1>
+
+                <p>
+                    Transform surplus food into meaningful support.
+                    Connect food donors, NGOs and volunteers through
+                    one smart food rescue platform.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="/register" class="btn-hero">
+                        Start Donating <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </a>
+
+                    <a href="#how-it-works" class="btn-outline-hero">
+                        Explore Platform
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 hero-image">
+
+                <img
+                    src="/static/uploads/home.jpg"
+                    alt="Fresh food ready to be shared">
+
+                <div class="floating-card">
+                    <i class="fa-solid fa-heart"></i>
+                    Every Meal Matters
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section-padding features-section" id="features">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <div class="section-tag">Our Features</div>
+
+            <h2 class="section-title">
+                A Smarter Way to Rescue Food
+            </h2>
+
+            <p class="section-description">
+                Technology-driven coordination that makes food
+                donation and collection easier, faster and more organised.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <h5>Food Donation</h5>
+                    <p>
+                        Donors can list surplus food with quantity,
+                        location, pickup details and food images.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <h5>Freshness Tracking</h5>
+                    <p>
+                        Time-based freshness status helps identify
+                        food that needs urgent collection.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <h5>Location Support</h5>
+                    <p>
+                        Location details help NGOs and volunteers
+                        coordinate food pickup efficiently.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-people-group"></i>
+                    </div>
+                    <h5>Community Network</h5>
+                    <p>
+                        Connect donors, NGOs and volunteers
+                        to support people in need.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section-padding" id="how-it-works">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <div class="section-tag">Simple Process</div>
+
+            <h2 class="section-title">How Food Rescue Works</h2>
+
+            <p class="section-description">
+                Three simple steps to turn surplus food into a
+                meaningful contribution.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <h5>Donate Food</h5>
+                    <p>
+                        Donors register and share available surplus
+                        food with necessary details.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <h5>Request Collection</h5>
+                    <p>
+                        NGOs view available donations and request
+                        food collection.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <h5>Rescue & Deliver</h5>
+                    <p>
+                        Volunteers coordinate pickup and help
+                        deliver food to people in need.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- USER ROLES -->
+<section class="section-padding roles-section" id="about">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <div class="section-tag">Join Our Network</div>
+
+            <h2 class="section-title">
+                Be Part of the Change
+            </h2>
+
+            <p class="section-description">
+                Every participant plays an important role in
+                reducing food waste and supporting communities.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <h5>Food Donors</h5>
+                    <p>
+                        Restaurants, hotels and individuals can
+                        share their surplus food.
+                    </p>
+                    <a href="/register" class="btn-register">
+                        Join as Donor
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
+                    <h5>NGO Partners</h5>
+                    <p>
+                        NGOs can discover food donations and
+                        organise collection for communities.
+                    </p>
+                    <a href="/register" class="btn-register">
+                        Join as NGO
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <h5>Volunteers</h5>
+                    <p>
+                        Volunteers can support pickup coordination
+                        and food distribution activities.
+                    </p>
+                    <a href="/register" class="btn-register">
+                        Join as Volunteer
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- IMPACT -->
+<section class="section-padding impact-section">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <div class="section-tag">Our Mission</div>
+
+            <h2 class="section-title">
+                Small Actions. Meaningful Impact.
+            </h2>
+
+            <p class="section-description">
+                Building a connected community where surplus food
+                becomes an opportunity to help someone.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-6 col-lg-3">
+                <div class="impact-item">
+                    <i class="fa-solid fa-bowl-food"></i>
+                    <h5>Save Food</h5>
+                    <p>Reduce avoidable food waste</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <div class="impact-item">
+                    <i class="fa-solid fa-heart"></i>
+                    <h5>Help People</h5>
+                    <p>Support communities in need</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <div class="impact-item">
+                    <i class="fa-solid fa-recycle"></i>
+                    <h5>Build Sustainability</h5>
+                    <p>Encourage responsible food use</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <div class="impact-item">
+                    <i class="fa-solid fa-handshake"></i>
+                    <h5>Connect Communities</h5>
+                    <p>Bring people together for good</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-box">
+
+            <h2>Be the Reason Food Finds a Home</h2>
+
+            <p>
+                Join Food Rescue Connect and help create a
+                community where no good food goes to waste.
+            </p>
+
+            <a href="/register" class="btn-register">
+                Get Started Today
+                <i class="fa-solid fa-arrow-right ms-2"></i>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <h5 class="fw-bold mb-2">
+            <i class="fa-solid fa-hand-holding-heart me-2"></i>
+            Food Rescue Connect
+        </h5>
+
+        <p>
+            Save Food. Share Hope. Build a Better Tomorrow.
+        </p>
+
+        <p class="mt-3">
+            © 2026 Food Rescue Connect | MCA Major Project
+        </p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>if ("serviceWorker" in navigator) { window.addEventListener("load", () => { navigator.serviceWorker.register("/service-worker.js").catch(error => console.error("Service worker registration failed:", error)); }); }</script>
+
+</body>
+</html>
